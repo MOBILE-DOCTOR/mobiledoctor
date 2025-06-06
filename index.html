@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mobile Doctor - Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <h1>Mobile Doctor</h1>
+  <div class="box">
+    <input type="email" id="email" placeholder="Email" />
+    <input type="text" id="username" placeholder="Username (for signup only)" />
+    <input type="password" id="password" placeholder="Password" />
+
+    <button onclick="login()">Login</button>
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="logout()">Logout</button>
+
+    <h3>Forgot Password?</h3>
+    <input type="email" id="forgotEmail" placeholder="Enter your email" />
+    <button onclick="showPassword()">Show Password</button>
+    <p id="foundPassword"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
