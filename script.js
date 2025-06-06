@@ -21,11 +21,12 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(user => {
       const uid = user.user.uid;
-      db.ref("users/" + uid).set({ email, username, password });
+      db.ref("users/" + uid).set({ email, username });  // REMOVE password from here
       alert("Signup successful!");
     })
     .catch(err => alert(err.message));
 }
+
 
 function login() {
   const email = document.getElementById("email").value;
@@ -41,20 +42,22 @@ function login() {
 function logout() {
   auth.signOut().then(() => alert("Logged out!"));
 }
-
-function showPassword() {
+function resetPassword() {
   const email = document.getElementById("forgotEmail").value;
-  db.ref("users").once("value", snapshot => {
-    let found = false;
-    snapshot.forEach(child => {
-      if (child.val().email === email) {
-        document.getElementById("foundPassword").innerText =
-          "Your password is: " + child.val().password;
-        found = true;
-      }
+  if (!email) {
+    alert("Please enter your email.");
+    return;
+  }
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => {
+      alert("Password reset email sent! Check your inbox.");
+      // Optionally clear the input
+      document.getElementById("forgotEmail").value = "";
+    })
+    .catch(error => {
+      alert("Error: " + error.message);
     });
-    if (!found) {
-      document.getElementById("foundPassword").innerText = "Email not found.";
-    }
-  });
 }
+
+
