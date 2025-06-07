@@ -9,14 +9,18 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1>Mobile Doctor</h1>
+            <h1><a href="home.html" style="text-decoration: none; color: #007bff;">Mobile Doctor</a></h1>
             <nav>
-                <a href="dashboard.html" class="nav-link">Home</a>
-                <a href="mobiles.html" class="nav-link">Mobile Gallery</a>
-                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="mobiles.html" class="nav-link">Mobiles</a>
+                <a href="cybersecurity.html" class="nav-link">Cybersecurity</a>
+                <a href="sim.html" class="nav-link">SIM Info</a>
+                <a href="contact-us.html" class="nav-link">Contact</a>
                 <div id="admin-link-container" style="display: none;">
-                    <a href="admin-panel.html" class="nav-link">Admin Panel</a>
+                    <a href="admin-panel.html" class="nav-link">Admin</a>
                 </div>
+                <a href="profile.html" class="nav-link">Profile</a>
                 <button onclick="logout()" class="button-logout">Logout</button>
             </nav>
         </div>
@@ -27,6 +31,12 @@
             <h2>Welcome to your Dashboard</h2>
             <p id="userInfo">Loading user information...</p>
         </div>
+
+        <div class="card text-center">
+             <h3>Quick Access</h3>
+             <a href="cybersecurity.html" class="nav-link" style="background-color: #17a2b8; color: white;">Learn Cybersecurity</a>
+             <a href="mobiles.html" class="nav-link">View Mobile Gallery</a>
+        </div>
     </main>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -34,14 +44,13 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <script src="script.js"></script>
     <script>
-        // Check user role and display admin link if applicable
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 const uid = user.uid;
                 firebase.database().ref("users/" + uid).once("value").then(snapshot => {
                     const data = snapshot.val();
                     if (data) {
-                        document.getElementById("userInfo").innerText = `Logged in as: ${data.username} (${data.email})`;
+                        document.getElementById("userInfo").innerText = `Logged in as: ${data.username}`;
                         if (data.role === "admin") {
                             document.getElementById("admin-link-container").style.display = "inline-block";
                         }

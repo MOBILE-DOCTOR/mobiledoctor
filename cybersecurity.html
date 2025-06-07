@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Hub - Mobile Doctor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1><a href="home.html" style="text-decoration: none; color: #007bff;">Mobile Doctor</a></h1>
+            <nav>
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="mobiles.html" class="nav-link">Mobiles</a>
+                <a href="cybersecurity.html" class="nav-link">Cybersecurity</a>
+                <a href="sim.html" class="nav-link">SIM Info</a>
+                <a href="contact-us.html" class="nav-link">Contact</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <button onclick="logout()" class="button-logout">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <h2>Cybersecurity Hub</h2>
+            <p>Welcome to the Cybersecurity Hub. Here you can learn about protecting yourself from digital threats and acquire new technical skills.</p>
+        </div>
+
+        <div class="card">
+            <h3>Common Cybersecurity Threats</h3>
+            <p><strong>Malware:</strong> Malicious software designed to disrupt operations or gain unauthorized access. This includes viruses, spyware, and ransomware.</p>
+            <p><strong>Phishing:</strong> Fraudulent attempts, usually via email, to trick individuals into revealing sensitive information like passwords or credit card numbers.</p>
+            <p><strong>Man-in-the-Middle (MitM) Attack:</strong> Attackers secretly intercept and relay communication between two parties to steal information. Public Wi-Fi is a common place for these attacks.</p>
+        </div>
+
+        <div class="card">
+            <h3>Cybersecurity Best Practices</h3>
+            <ul>
+                <li><strong>Use Strong, Unique Passwords:</strong> Combine letters, numbers, and symbols. Use a different password for every account.</li>
+                <li><strong>Enable Two-Factor Authentication (2FA):</strong> Adds a second layer of security, requiring a code from your phone in addition to your password.</li>
+                <li><strong>Keep Software Updated:</strong> Updates often contain critical security patches to protect against new vulnerabilities.</li>
+                <li><strong>Be Wary of Phishing:</strong> Always check the sender's email address and be suspicious of unexpected attachments or links.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Learn How to Install Linux in VirtualBox</h2>
+            <p>Using a Virtual Machine (VM) is a safe way to test software or learn about new operating systems without affecting your main computer. Follow these steps to install Ubuntu, a popular Linux distribution, in VirtualBox.</p>
+            
+            <h4>Step 1: Download Required Software</h4>
+            <ul>
+                <li><strong>VirtualBox:</strong> Download it from the <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">official VirtualBox website</a>. Install it on your computer.</li>
+                <li><strong>Ubuntu ISO:</strong> Download the latest Ubuntu Desktop image (.iso file) from the <a href="https://ubuntu.com/download/desktop" target="_blank">official Ubuntu website</a>.</li>
+            </ul>
+
+            <h4>Step 2: Create a New Virtual Machine</h4>
+            <ol>
+                <li>Open VirtualBox and click the "New" button.</li>
+                <li><strong>Name and Operating System:</strong> Give your VM a name (e.g., "Ubuntu VM"). VirtualBox should automatically detect the Type and Version as Linux/Ubuntu.</li>
+                <li><strong>Memory Size:</strong> Allocate RAM for the VM. 4GB (4096 MB) is recommended for good performance.</li>
+                <li><strong>Hard Disk:</strong> Select "Create a virtual hard disk now". Choose "VDI (VirtualBox Disk Image)".</li>
+                <li><strong>Storage:</strong> Select "Dynamically allocated" for efficient disk space usage.</li>
+                <li><strong>File location and size:</strong> Allocate at least 25GB for the virtual hard disk. Click "Create".</li>
+            </ol>
+
+            <h4>Step 3: Install Ubuntu Linux</h4>
+            <ol>
+                <li>Select your new VM from the list in VirtualBox and click "Start".</li>
+                <li>A "Select start-up disk" window will appear. Click the folder icon and navigate to the Ubuntu .iso file you downloaded. Click "Start".</li>
+                <li>The VM will boot into the Ubuntu installer. Click "Install Ubuntu".</li>
+                <li>Follow the on-screen instructions for keyboard layout and updates.</li>
+                <li>At "Installation type", choose "Erase disk and install Ubuntu". This is safe as it only affects the virtual disk, not your computer. Click "Install Now".</li>
+                <li>Set your time zone, then create your user account with a username and password.</li>
+                <li>The installation will proceed. Once it's finished, restart the VM as prompted.</li>
+            </ol>
+            
+            <h4>Step 4: Install Guest Additions (Optional but Recommended)</h4>
+            <p>After Ubuntu is running, go to the VM window's menu and select <strong>Devices > Insert Guest Additions CD image...</strong>. This improves performance and allows for features like a shared clipboard and resizable display. Run the installer that appears inside Ubuntu.</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
