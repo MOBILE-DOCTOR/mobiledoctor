@@ -1,60 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Mobile Gallery - Mobile Doctor</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 30px;
-      background-color: #f5f5f5;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .item {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    .item img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-    .item p {
-      margin-top: 10px;
-      color: #444;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Gallery - Mobile Doctor</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <h1>Mobile Gallery</h1>
+            <nav>
+                <a href="dashboard.html" class="nav-link">Home</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <button onclick="logout()" class="button-logout">Logout</button>
+            </nav>
+        </div>
+    </header>
 
-  <h1>Mobile Gallery</h1>
+    <main class="container">
+        <div class="card">
+            <input type="text" id="search-bar" onkeyup="searchMobiles()" placeholder="Search for mobiles...">
+        </div>
+        <div class="gallery" id="mobile-gallery">
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="iPhone">
+                <p><strong>iPhone 14 Pro</strong><br>Premium phone with A16 chip, triple camera & Retina XDR display.</p>
+            </div>
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="Samsung">
+                <p><strong>Samsung Galaxy S23</strong><br>Flagship Android with dynamic AMOLED display and great battery life.</p>
+            </div>
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="Redmi">
+                <p><strong>Redmi Note 12</strong><br>Budget-friendly device with high performance and large display.</p>
+            </div>
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="Pixel">
+                <p><strong>Google Pixel 7</strong><br>Known for its exceptional camera and clean Android experience.</p>
+            </div>
+        </div>
+    </main>
 
-  <div class="gallery">
-    <div class="item">
-      <img src="images/iphone.jpg" alt="iPhone">
-      <p><strong>iPhone 14 Pro</strong><br>Premium phone with A16 chip, triple camera & Retina XDR display.</p>
-    </div>
-    <div class="item">
-      <img src="images/samsung.jpg" alt="Samsung">
-      <p><strong>Samsung Galaxy S23</strong><br>Flagship Android with dynamic AMOLED display and great battery life.</p>
-    </div>
-    <div class="item">
-      <img src="images/redmi.jpg" alt="Redmi">
-      <p><strong>Redmi Note 12</strong><br>Budget-friendly device with high performance and large display.</p>
-    </div>
-    <!-- Add more mobiles here -->
-  </div>
-
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

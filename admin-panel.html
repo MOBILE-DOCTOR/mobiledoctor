@@ -1,11 +1,66 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Panel</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Mobile Doctor</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Welcome to the Admin Panel</h1>
-  <p>Manage users, view reports, and perform administrative tasks here.</p>
+    <header class="header">
+        <div class="container">
+            <h1>Admin Panel</h1>
+            <nav>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="mobiles.html" class="nav-link">Mobile Gallery</a>
+                <button onclick="logout()" class="button-logout">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <h2>User Management</h2>
+            <div id="user-list-container">
+                <table id="user-list">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Check if admin and load users
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                const uid = user.uid;
+                const usersRef = firebase.database().ref("users");
+
+                usersRef.child(uid).once("value").then(snapshot => {
+                    const userData = snapshot.val();
+                    if (userData.role !== 'admin') {
+                        alert("Access Denied. You are not an admin.");
+                        window.location.href = 'dashboard.html';
+                        return;
+                    }
+                    loadUsers();
+                });
+            } else {
+                window.location.href = "index.html";
+            }
+        });
+    </script>
 </body>
 </html>

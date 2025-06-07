@@ -1,61 +1,49 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mobile Doctor - Login</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <style>
-    #strengthMessage {
-      font-size: 14px;
-      margin-top: -10px;
-      margin-bottom: 10px;
-    }
-    .weak { color: red; }
-    .medium { color: orange; }
-    .strong { color: green; }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Doctor - Login</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 </head>
 <body>
-  <h1>Mobile Doctor</h1>
-  <div class="box">
-    <select id="role">
-      <option value="user">👤 User Login</option>
-      <option value="admin">🛠 Admin Login</option>
-    </select>
-    <input type="email" id="email" placeholder="Email" />
-    <input type="text" id="username" placeholder="Username (for signup only)" />
-    <input type="password" id="password" placeholder="Password" onkeyup="checkPasswordStrength(this.value)" />
-    <div id="strengthMessage"></div>
+    <div class="container">
+        <div class="form-container" id="login-container">
+            <div class="form-box">
+                <h1>Login</h1>
+                <input type="email" id="loginEmail" placeholder="Email" required />
+                <input type="password" id="loginPassword" placeholder="Password" required />
+                <button onclick="login()">Login</button>
+                <p>Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
+                <p><a href="#" onclick="showResetPassword()">Forgot Password?</a></p>
+            </div>
+        </div>
 
-    <button onclick="login()">Login</button>
-    <button onclick="signup()">Sign Up</button>
-    <button onclick="logout()">Logout</button>
+        <div class="form-container" id="signup-container" style="display: none;">
+            <div class="form-box">
+                <h1>Sign Up</h1>
+                <input type="text" id="signupUsername" placeholder="Username" required />
+                <input type="email" id="signupEmail" placeholder="Email" required />
+                <input type="password" id="signupPassword" placeholder="Password" onkeyup="checkPasswordStrength(this.value)" required />
+                <div id="strengthMessage"></div>
+                <button onclick="signup()">Sign Up</button>
+                <p>Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+            </div>
+        </div>
 
-    <h3>Forgot Password?</h3>
-    <input type="email" id="forgotEmail" placeholder="Enter your email" />
-    <button onclick="resetPassword()">Reset Password</button>
+        <div class="form-container" id="reset-password-container" style="display: none;">
+            <div class="form-box">
+                <h1>Reset Password</h1>
+                <input type="email" id="forgotEmail" placeholder="Enter your email" required />
+                <button onclick="resetPassword()">Reset Password</button>
+                <p><a href="#" onclick="showLogin()">Back to Login</a></p>
+            </div>
+        </div>
+    </div>
 
-    <p id="foundPassword"></p>
-  </div>
-
-  <script src="script.js"></script>
-  <script>
-    function checkPasswordStrength(password) {
-      const msg = document.getElementById("strengthMessage");
-      let strength = "";
-      if (password.length < 6) {
-        strength = "<span class='weak'>Weak</span>";
-      } else if (password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/[0-9]/)) {
-        strength = "<span class='strong'>Strong</span>";
-      } else {
-        strength = "<span class='medium'>Medium</span>";
-      }
-      msg.innerHTML = "Password Strength: " + strength;
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>

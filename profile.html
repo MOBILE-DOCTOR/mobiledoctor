@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mobile Doctor</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>User Profile - Mobile Doctor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
@@ -14,18 +14,23 @@
                 <a href="dashboard.html" class="nav-link">Home</a>
                 <a href="mobiles.html" class="nav-link">Mobile Gallery</a>
                 <a href="profile.html" class="nav-link">Profile</a>
-                <div id="admin-link-container" style="display: none;">
-                    <a href="admin-panel.html" class="nav-link">Admin Panel</a>
-                </div>
                 <button onclick="logout()" class="button-logout">Logout</button>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <div class="card text-center">
-            <h2>Welcome to your Dashboard</h2>
-            <p id="userInfo">Loading user information...</p>
+        <div class="card">
+            <h2>Your Profile</h2>
+            <div id="profile-info">
+                <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            </div>
+            <div id="profile-edit">
+                <h3>Edit Profile</h3>
+                <input type="text" id="updateUsername" placeholder="New username">
+                <button onclick="updateProfile()">Update Profile</button>
+            </div>
         </div>
     </main>
 
@@ -34,17 +39,16 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <script src="script.js"></script>
     <script>
-        // Check user role and display admin link if applicable
+        // Load user profile data
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 const uid = user.uid;
                 firebase.database().ref("users/" + uid).once("value").then(snapshot => {
                     const data = snapshot.val();
                     if (data) {
-                        document.getElementById("userInfo").innerText = `Logged in as: ${data.username} (${data.email})`;
-                        if (data.role === "admin") {
-                            document.getElementById("admin-link-container").style.display = "inline-block";
-                        }
+                        document.getElementById("profileUsername").innerText = data.username;
+                        document.getElementById("profileEmail").innerText = data.email;
+                        document.getElementById("updateUsername").value = data.username;
                     }
                 });
             } else {
