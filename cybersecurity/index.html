@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cybersecurity for Beginners</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    #darkModeToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #444;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    nav {
+      background: #444;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+    }
+    nav a {
+      color: #fff;
+      margin: 5px 10px;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 5px 10px;
+      background-color: #333;
+      border-radius: 5px;
+    }
+    nav a:hover {
+      background-color: #555;
+    }
+    section {
+      padding: 20px;
+      background: white;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    body.dark-mode section {
+      background: #1e1e1e;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    @media (max-width: 768px) {
+      nav a {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cybersecurity for Beginners</h1>
+    <p>Your Step-by-Step Guide to Mastering the Basics</p>
+    <button id="darkModeToggle">🌓 Toggle Dark Mode</button>
+  </header>
+  <nav>
+    <a href="#what">What is Cybersecurity?</a>
+    <a href="#why">Why it Matters</a>
+    <a href="#path">Learning Path</a>
+    <a href="#modules">Modules</a>
+    <a href="#tools">Tools</a>
+    <a href="#labs">Labs</a>
+    <a href="#certs">Certifications</a>
+    <a href="#career">Careers</a>
+    <a href="#videos">Videos</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="what">
+    <h2>What is Cybersecurity?</h2>
+    <p>Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks...</p>
+  </section>
+
+  <section id="why">
+    <h2>Why Cybersecurity Matters</h2>
+    <ul>
+      <li>Cybercrime is growing rapidly</li>
+      <li>Data privacy and protection</li>
+      <li>National and corporate security</li>
+      <li>Career demand for cybersecurity experts</li>
+    </ul>
+  </section>
+
+  <section id="path">
+    <h2>Getting Started - Your Learning Path</h2>
+    <ol>
+      <li>Understand the fundamentals</li>
+      <li>Learn networking and operating systems</li>
+      <li>Master security principles</li>
+      <li>Explore ethical hacking</li>
+      <li>Practice with tools and labs</li>
+      <li>Get certified</li>
+      <li>Build real-world experience</li>
+    </ol>
+  </section>
+
+  <section id="modules">
+    <h2>Step-by-Step Learning Modules</h2>
+    <ul>
+      <li>Module 1: Computer & Network Basics</li>
+      <li>Module 2: Operating Systems</li>
+      <li>Module 3: Cyber Threats & Attacks</li>
+      <li>Module 4: Security Tools Introduction</li>
+      <li>Module 5: Web Application Security</li>
+      <li>Module 6: Wireless Security</li>
+      <li>Module 7: Digital Forensics & Incident Response</li>
+      <li>Module 8: Ethical Hacking & Pentesting</li>
+      <li>Module 9: Secure Coding & DevSecOps</li>
+      <li>Module 10: Soft Skills & Ethics</li>
+    </ul>
+  </section>
+
+  <section id="tools">
+    <h2>Tools & Resources</h2>
+    <ul>
+      <li>Wireshark</li>
+      <li>Nmap</li>
+      <li>Metasploit</li>
+      <li>Burp Suite</li>
+      <li>TryHackMe & Hack The Box</li>
+    </ul>
+  </section>
+
+  <section id="labs">
+    <h2>Practice Labs</h2>
+    <p>Hands-on labs for each module, CTFs, and simulated scenarios to build your skills.</p>
+  </section>
+
+  <section id="certs">
+    <h2>Certification Roadmap</h2>
+    <ul>
+      <li>CompTIA Security+</li>
+      <li>CEH (Certified Ethical Hacker)</li>
+      <li>OSCP (Offensive Security Certified Professional)</li>
+      <li>CISSP (Certified Information Systems Security Professional)</li>
+    </ul>
+  </section>
+
+  <section id="career">
+    <h2>Career Guidance</h2>
+    <p>Explore job roles from entry-level SOC Analyst to CISO. Get tips on resume building and interview prep.</p>
+  </section>
+
+  <section id="videos">
+    <h2>Video Learning</h2>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=inWWhr5tnEA" target="_blank">Introduction to Cybersecurity (Cisco)</a></li>
+      <li><a href="https://www.youtube.com/watch?v=3E5s3SPA260" target="_blank">Cybersecurity Full Course for Beginners (Simplilearn)</a></li>
+      <li><a href="https://www.youtube.com/watch?v=KpYQYBvgKJA" target="_blank">Top 10 Ethical Hacking Tools (FreeCodeCamp)</a></li>
+      <li><a href="https://www.youtube.com/watch?v=TkCSr30UojM" target="_blank">Wireshark Tutorial for Beginners</a></li>
+      <li><a href="https://www.youtube.com/watch?v=3Kq1MIfTWCE" target="_blank">Ethical Hacking Full Course (FreeCodeCamp)</a></li>
+    </ul>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <ul>
+      <li>Do I need a computer science degree?</li>
+      <li>Can I learn cybersecurity without coding?</li>
+      <li>Which programming languages are useful?</li>
+      <li>How long will it take to become job-ready?</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email us: <a href="mailto:support@cyberbeginner.com">support@cyberbeginner.com</a></p>
+  </section>
+
+  <footer>
+    <p>Cybersecurity for Beginners | © 2025 All rights reserved</p>
+  </footer>
+  <script>
+    const toggleButton = document.getElementById('darkModeToggle');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>
