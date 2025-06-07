@@ -1,65 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mobile Doctor</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Mobile Doctor</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1><a href="home.html" style="text-decoration: none; color: #007bff;">Mobile Doctor</a></h1>
-            <nav>
-                <a href="home.html" class="nav-link">Home</a>
-                <a href="dashboard.html" class="nav-link">Dashboard</a>
-                <a href="mobiles.html" class="nav-link">Mobiles</a>
-                <a href="cybersecurity.html" class="nav-link">Cybersecurity</a>
-                <a href="sim.html" class="nav-link">SIM Info</a>
-                <a href="contact-us.html" class="nav-link">Contact</a>
-                <div id="admin-link-container" style="display: none;">
-                    <a href="admin-panel.html" class="nav-link">Admin</a>
-                </div>
-                <a href="profile.html" class="nav-link">Profile</a>
-                <button onclick="logout()" class="button-logout">Logout</button>
-            </nav>
+  <header class="header">
+    <div class="container">
+      <h1><a href="home.html" style="text-decoration: none; color: #007bff;">Mobile Doctor</a></h1>
+      <nav>
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="mobiles.html" class="nav-link">Mobiles</a>
+        <a href="cybersecurity.html" class="nav-link">Cybersecurity</a>
+        <a href="sim.html" class="nav-link">SIM Info</a>
+        <a href="contact-us.html" class="nav-link">Contact</a>
+        <div id="admin-link-container" style="display: none;">
+          <a href="admin-panel.html" class="nav-link">Admin</a>
         </div>
-    </header>
+        <a href="profile.html" class="nav-link">Profile</a>
+        <button onclick="logout()" class="button-logout">Logout</button>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container">
-        <div class="card text-center">
-            <h2>Welcome to your Dashboard</h2>
-            <p id="userInfo">Loading user information...</p>
-        </div>
+  <main class="container">
+    <div class="card text-center">
+      <h2>Welcome to your Dashboard</h2>
+      <p id="userInfo">Loading user information...</p>
+    </div>
 
-        <div class="card text-center">
-             <h3>Quick Access</h3>
-             <a href="cybersecurity.html" class="nav-link" style="background-color: #17a2b8; color: white;">Learn Cybersecurity</a>
-             <a href="mobiles.html" class="nav-link">View Mobile Gallery</a>
-        </div>
-    </main>
+    <div class="card text-center">
+      <h3>Quick Access</h3>
+      <a href="cybersecurity.html" class="nav-link" style="background-color: #17a2b8; color: white;">Learn Cybersecurity</a>
+      <a href="mobiles.html" class="nav-link">View Mobile Gallery</a>
+    </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-    <script src="script.js"></script>
-    <script>
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                const uid = user.uid;
-                firebase.database().ref("users/" + uid).once("value").then(snapshot => {
-                    const data = snapshot.val();
-                    if (data) {
-                        document.getElementById("userInfo").innerText = `Logged in as: ${data.username}`;
-                        if (data.role === "admin") {
-                            document.getElementById("admin-link-container").style.display = "inline-block";
-                        }
-                    }
-                });
-            } else {
-                window.location.href = "index.html";
+    <div class="card text-center">
+      <h3>Your Fingerprint Info</h3>
+      <p>Fingerprint ID: <span id="fingerprint">Loading...</span></p>
+    </div>
+  </main>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <script>
+    // ✅ Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC2Hz_o8irzeoLRW5YYT2dCEW024lf39MY",
+      authDomain: "fingerprintlogger-2e5d4.firebaseapp.com",
+      projectId: "fingerprintlogger-2e5d4",
+      storageBucket: "fingerprintlogger-2e5d4.firebasestorage.app",
+      messagingSenderId: "62847542962",
+      appId: "1:62847542962:web:0f68af885ad25302bf4bab"
+    };
+
+    // ✅ Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // 🔐 Auth check and load user info
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        const uid = user.uid;
+
+        // Show user info
+        firebase.database().ref("users/" + uid).once("value").then(snapshot => {
+          const data = snapshot.val();
+          if (data) {
+            document.getElementById("userInfo").innerText = `Logged in as: ${data.username || user.email}`;
+            if (data.role === "admin") {
+              document.getElementById("admin-link-container").style.display = "inline-block";
             }
+          } else {
+            document.getElementById("userInfo").innerText = `Logged in as: ${user.email}`;
+          }
         });
-    </script>
+
+        // Log fingerprint
+        FingerprintJS.load().then(fp => {
+          fp.get().then(result => {
+            const fingerprint = result.visitorId;
+            document.getElementById("fingerprint").textContent = fingerprint;
+
+            // Save visit data to Firebase
+            firebase.database().ref("visitors/" + fingerprint).set({
+              email: user.email,
+              uid: user.uid,
+              browser: navigator.userAgent,
+              pageUrl: window.location.href,
+              timestamp: new Date().toISOString(),
+              fingerprint: fingerprint
+            });
+          });
+        });
+
+      } else {
+        window.location.href = "index.html"; // not logged in
+      }
+    });
+
+    // 🚪 Logout function
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+      });
+    }
+  </script>
 </body>
 </html>
