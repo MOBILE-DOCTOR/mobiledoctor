@@ -1,9 +1,11 @@
+<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Dashboard - Mobile Doctor</title>
   <link rel="stylesheet" href="style.css" />
+  <script type="module" src="scripts/auth.js"></script>
   <style>
     .button {
       display: inline-block;
@@ -20,19 +22,23 @@
   </style>
 </head>
 <body>
-<a href="https://mobile-doctor.github.io/mobiledoctor/cybersecurity/index.html" target="_blank" style="display:inline-block;padding:12px 20px;background-color:#007bff;color:#fff;text-decoration:none;border-radius:5px;font-size:16px;">
+  <body>
+<a href="https://mobile-doctor.github.io/mobiledoctor/cybersecurity/index.html" target="_blank" class="button">
   🔐 Learn Cybersecurity
 </a>
 
-  <h1>Welcome to Mobile Doctor Dashboard</h1>
-  <p id="userInfo"></p>
+<h1>Welcome to Mobile Doctor Dashboard</h1>
+<p id="userInfo"></p>
 
-  <!-- ✅ Link to Mobile Gallery -->
-  <a href="mobiles.html" class="button">View Mobile Gallery</a>
+<a href="mobiles.html" class="button">View Mobile Gallery</a>
+<button onclick="logout()" class="button">Logout</button>
 
-  <!-- ✅ Logout Button -->
-  <button onclick="window.location.href='index.html'" class="button">Logout</button>
-	<!-- Google AdSense Ad (Bottom of Body) -->
+<!-- Admin Panel Access Button (only visible for admin) -->
+<div id="adminControls" style="display: none;">
+  <a href="admin-panel.html" class="button" style="background-color: green;">⚙ Admin Panel</a>
+</div>
+
+<!-- AdSense (unchanged) -->
 <div id="adsContainer" style="margin-top: 20px; text-align: center;">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2488763930939291"
      crossorigin="anonymous"></script>
@@ -41,10 +47,32 @@
        data-ad-format="autorelaxed"
        data-ad-client="ca-pub-2488763930939291"
        data-ad-slot="8472395078"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+<script src="scripts.js"></script>
+<script>
+// Admin/User Role Check Script (v8 style)
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    const uid = user.uid;
+    firebase.database().ref("users/" + uid).once("value").then(snapshot => {
+      const data = snapshot.val();
+      document.getElementById("userInfo").innerText = `Logged in as: ${data.username}`;
+
+      // Show admin panel if role is 'admin'
+      if (data.role === "admin") {
+        document.getElementById("adminControls").style.display = "block";
+      }
+    });
+  } else {
+    alert("Please login first.");
+    window.location.href = "index.html";
+  }
+});
+</script>
+</body>
 
 </body>
 </html>

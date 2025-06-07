@@ -21,7 +21,8 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(user => {
       const uid = user.user.uid;
-      db.ref("users/" + uid).set({ email, username });  // REMOVE password from here
+      const role = "user"; // default role
+      db.ref("users/" + uid).set({ email, username, role }); // include role
       alert("Signup successful!");
     })
     .catch(err => alert(err.message));
