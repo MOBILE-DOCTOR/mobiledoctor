@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +8,28 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <style>
+    #strengthMessage {
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+    .weak { color: red; }
+    .medium { color: orange; }
+    .strong { color: green; }
+  </style>
 </head>
 <body>
   <h1>Mobile Doctor</h1>
   <div class="box">
+    <select id="role">
+      <option value="user">👤 User Login</option>
+      <option value="admin">🛠 Admin Login</option>
+    </select>
     <input type="email" id="email" placeholder="Email" />
     <input type="text" id="username" placeholder="Username (for signup only)" />
-    <input type="password" id="password" placeholder="Password" />
+    <input type="password" id="password" placeholder="Password" onkeyup="checkPasswordStrength(this.value)" />
+    <div id="strengthMessage"></div>
 
     <button onclick="login()">Login</button>
     <button onclick="signup()">Sign Up</button>
@@ -27,5 +43,19 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    function checkPasswordStrength(password) {
+      const msg = document.getElementById("strengthMessage");
+      let strength = "";
+      if (password.length < 6) {
+        strength = "<span class='weak'>Weak</span>";
+      } else if (password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/[0-9]/)) {
+        strength = "<span class='strong'>Strong</span>";
+      } else {
+        strength = "<span class='medium'>Medium</span>";
+      }
+      msg.innerHTML = "Password Strength: " + strength;
+    }
+  </script>
 </body>
 </html>
